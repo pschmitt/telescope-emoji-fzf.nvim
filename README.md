@@ -44,5 +44,5 @@ end
 # Example nvim mapping
 
 ```lua
-vim.cmd('inoremap <c-e> <Esc>:lua require("telescope-emoji-fzf").emoji_fzf()<CR>')
+vim.cmd('inoremap <c-e> <Esc>:Telescope emoji_fzf<CR>')
 ```
