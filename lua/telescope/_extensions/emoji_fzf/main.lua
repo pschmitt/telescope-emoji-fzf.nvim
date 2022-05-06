@@ -41,7 +41,7 @@ M.emoji_fzf = function(opts)
         -- print(vim.inspect(selection.value))
         -- vim.api.nvim_put({ selection.value }, "", false, true)
         -- Replace current word
-        vim.cmd("normal! diwi")
+        vim.cmd("normal! ciw")
         vim.api.nvim_put({ selection.value }, "", true, true)
         -- Clear cmdline
         vim.cmd("echon ''")
