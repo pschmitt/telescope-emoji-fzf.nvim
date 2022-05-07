@@ -12,7 +12,9 @@ M.emoji_fzf = function(opts)
 
   local command = vim.F.if_nil(opts.command, { "emoji-fzf", "preview", "--prepend" })
 
-  opts.default_text = opts.search or vim.fn.expand "<cword>"
+  -- Default query
+  local query = vim.fn.expand("<cword>", nil, nil)
+  opts.default_text = opts.search or string.lower(query)
 
   opts.entry_maker = function(entry)
     local words = {}
@@ -31,18 +33,16 @@ M.emoji_fzf = function(opts)
       vim.tbl_flatten { command, },
       opts
     ),
-    -- previewer = conf.file_previewer(opts),
     sorter = conf.generic_sorter(opts),
     attach_mappings = function(prompt_bufnr, _)
       actions.select_default:replace(function()
         actions.close(prompt_bufnr)
         local selection = action_state.get_selected_entry()
-        -- print(vim.inspect(selection))
-        -- print(vim.inspect(selection.value))
-        -- vim.api.nvim_put({ selection.value }, "", false, true)
+        local emoji = selection.value
+
         -- Replace current word
         vim.cmd("normal! ciw")
-        vim.api.nvim_put({ selection.value }, "", true, true)
+        vim.api.nvim_put({ emoji }, "", true, true)
         -- Clear cmdline
         vim.cmd("echon ''")
       end)
