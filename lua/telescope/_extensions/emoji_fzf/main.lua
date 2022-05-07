@@ -46,6 +46,7 @@ M.emoji_fzf = function(opts)
         -- Clear cmdline
         vim.cmd("echon ''")
       end)
+
       return true
     end,
   }):find()
